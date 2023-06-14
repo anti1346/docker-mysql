@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+
+  mysql:
+    image: mysql:5.7.42-debian
+    restart: always
+    container_name: mysql
+    hostname: mysql
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Seoul
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    ports:
+      - 3306:3306
