@@ -1,0 +1,36 @@
+### mha.cnf(/home/mhauser/mha/conf/mha.cnf)
+[server default]
+manager_workdir=/home/mhauser/mha
+
+manager_log=/home/mhauser/mha/logs/manager.log
+
+remote_workdir=/home/mhauser/mha
+
+secondary_check_script=masterha_secondary_check -s 192.168.56.101 -s 192.168.56.102 -s 192.168.56.103
+
+#master_ip_online_change_script=/home/mhauser/mha/scripts/master_ip_online_change
+master_ip_failover_script=/home/mhauser/mha/scripts/master_ip_failover
+#shutdown_script=/home/mhauser/mha/scripts/shutdown_script
+#report_script=/home/mhauser/mha/send_report
+
+master_binlog_dir=/usr/local/mysql/data
+
+master_pid_file=/var/run/mysqld/mysqld.pid
+
+[server1]
+hostname=192.168.56.101
+port=3306
+master_binlog_dir=/usr/local/mysql/data
+candidate_master=1
+
+[server2]
+hostname=192.168.56.102
+port=3306
+master_binlog_dir=/usr/local/mysql/data
+candidate_master=1
+
+[server3]
+hostname=192.168.56.103
+port=3306
+master_binlog_dir=/usr/local/mysql/data
+no_master=1

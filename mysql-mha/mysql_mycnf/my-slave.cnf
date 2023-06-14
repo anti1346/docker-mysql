@@ -1,0 +1,42 @@
+### my.cnf(/usr/local/mysql/my.cnf)
+[mysqld]
+bind-address = 0.0.0.0
+port = 3306
+
+user = mysql
+
+basedir = /usr/local/mysql
+datadir = /usr/local/mysql/data
+socket = /tmp/mysql.sock
+pid-file = /var/run/mysqld/mysqld.pid
+
+log-error = /usr/local/mysql/data/error.log
+log-error-verbosity = 3
+
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/mysql-slow.log
+long_query_time = 2
+
+symbolic-links = 0
+
+explicit_defaults_for_timestamp = 1
+
+#skip-grant-tables
+skip-name-resolve
+
+server-id = 2
+log-bin = /usr/local/mysql/data/mysql-bin
+max_binlog_size = 100M
+binlog-format = ROW
+expire_logs_days = 7
+sync_binlog = 1
+log_slave_updates = 1
+report-host = node2
+relay-log = /usr/local/mysql/data/relay-log
+relay_log_purge = 0
+slave-skip-errors = all
+read_only = 1
+
+[client]
+port = 3306
+socket = /tmp/mysql.sock

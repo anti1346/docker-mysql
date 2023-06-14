@@ -1,0 +1,11 @@
+### masterha_default.cnf(/etc/masterha_default.cnf)
+[server default]
+user=mhauser
+password=mhapassword
+
+ssh_user=mhauser
+ssh_port=22
+
+repl_user=mhauser
+repl_password=mhapassword
+ping_interval=1

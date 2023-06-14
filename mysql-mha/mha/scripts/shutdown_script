@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Get the current time
+now=$(date +"%Y-%m-%d %H:%M:%S")
+
+# Check whether the system is running in production mode
+if [ "$ENV" = "production" ]; then
+
+  # Send a notification to the system administrators
+  echo "The system is being shut down." | sendmail -s "System Shutdown" admin@example.com
+
+  # Stop all services
+  service mysql stop
+  service apache2 stop
+  service nginx stop
+
+  # Shutdown the system
+  shutdown -h now
+
+else
+
+  echo "The system is not running in production mode. Skipping shutdown."
+
+fi

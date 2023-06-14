@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source /root/.bash_profile
+
+### 변수
+orig_master_host=$(echo "$1" | awk -F= '{print $2}')
+new_master_host=$(echo "$2" | awk -F= '{print $2}')
+new_slave_hosts=$(echo "$3" | awk -F= '{print $2}')
+subject=$(echo "$4" | awk -F= '{print $2}')
+body=$(echo "$5" | awk -F= '{print $2}')
+
+### 수신자 이메일 주소
+email="monitor@sangchul.kr"
+
+# MHA 상태 확인 및 이메일 전송
+if tac /var/log/mha/app1/manager.log | sed -n 2p | grep -q 'successfully'; then
+    messages=$(echo -e "MHA $subject 마스터-슬레이브 스위칭 성공\n master:$orig_master_host --> $new_master_host \n $body \n 라이브러리의 최신 자료:$new_slave_hosts")
+    echo "$messages" | mail -s "Mysql 인스턴스 다운, MHA $subject 스위칭 성공" "$email" >>/tmp/mailx.log 2>&1
+else
+    messages=$(echo -e "MHA $subject 마스터-슬레이브 스위칭 실패\n master:$orig_master_host --> $new_master_host \n $body")
+    echo "$messages" | mail -s "Mysql 인스턴스 다운, MHA $subject 스위칭 실패" "$email" >>/tmp/mailx.log 2>&1
+fi
