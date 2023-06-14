@@ -1,0 +1,30 @@
+### my.cnf
+[mysqld]
+bind-address = 0.0.0.0
+port = 3306
+
+user = mysql
+
+basedir = /usr/local/mysql
+datadir = /usr/local/mysql/data
+socket = /tmp/mysql.sock
+pid-file = /var/run/mysqld/mysqld.pid
+log-error = /usr/local/mysql/data/error.log
+log-error-verbosity = 3
+
+symbolic-links = 0
+
+#skip-grant-tables
+skip-name-resolve
+
+server-id=1
+log-bin=/usr/local/mysql/data/mysql-bin
+relay-log=/usr/local/mysql/data/relay-log
+binlog-format=ROW
+expire_logs_days=7
+relay_log_purge=0
+log_slave_updates=1
+
+[client]
+port = 3306
+socket = /tmp/mysql.sock

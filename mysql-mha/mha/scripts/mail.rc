@@ -1,0 +1,7 @@
+set from=no-reply@sangchul.kr
+set smtp=smtps://smtp.sangchul.kr:465
+set smtp-auth-user=no-reply@sangchul.kr
+set smtp-auth-password=****************
+set smtp-auth=login
+set nss-config-dir=/etc/pki/nssdb
+set ssl-verify=ignore
